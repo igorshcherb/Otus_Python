@@ -1,3 +1,11 @@
+class FileOpenError(Exception):
+    pass
+
+
+class FileSaveError(Exception):
+    pass
+
+
 def print_menu() -> None:
     """
     Вывод меню в консоль
@@ -43,7 +51,7 @@ def info_contact_created() -> None:
 def get_new_contact_data() -> (str, str, str):
     """
     Получение от пользователя данных нового контакта
-    :return: str, str, str
+    :return: (имя, телефон, комментарий)
     """
     new_name = input("Введите имя нового контакта: ")
     new_phone = input("Введите телефон: ")
@@ -54,7 +62,7 @@ def get_new_contact_data() -> (str, str, str):
 def get_name_to_search() -> str:
     """
     Получение от пользователя имени для поиска
-    :return: str
+    :return: имя для поиска
     """
     search_name = input("Введите имя для поиска: ")
     return search_name
@@ -63,7 +71,7 @@ def get_name_to_search() -> str:
 def get_data_to_change() -> (str, str, str):
     """
     Получение от пользователя данных для изменения
-    :return: (str, str, str)
+    :return: (имя, телефон, комментарий)
     """
     change_name = input("Введите имя для изменения: ")
     change_phone = input("Введите телефон: ")
@@ -74,7 +82,7 @@ def get_data_to_change() -> (str, str, str):
 def get_name_to_delete() -> str:
     """
     Получение от пользователя имени для удаления
-    :return: str
+    :return: имя для удаления
     """
     delete_name = input("Введите имя для удаления: ")
     return delete_name
@@ -83,10 +91,22 @@ def get_name_to_delete() -> str:
 def get_digit() -> int:
     """
     Получение от пользователя цифры, соответствующей пункту меню
-    :return: int
+    :return: введенная цифра
     """
-    input_dig = int(input("Введите цифру 1..8: "))
+    input_char = input("Введите цифру 1..8: ")
+    try:
+        input_dig = int(input_char)
+    except ValueError:
+        # Введена не цифра
+        input_dig = 0
     return input_dig
+
+
+def alert_not_digit() -> None:
+    """
+    Предупреждение: введена не цифра
+    """
+    print("Введена не цифра.")
 
 
 def alert_wrong_digit() -> None:
@@ -105,7 +125,33 @@ def print_catalog(catalog_list: list) -> None:
 
 
 def output_str(out_str: str):
+    """
+    Вывод заданной строки в консоль
+    """
     print(out_str)
+
+
+def raise_file_open_exception():
+    """
+    Вызов исключения открытия/разбора файла
+    """
+    raise FileOpenError(
+        """
+        Ошибка открытия/разбора файла. 
+        Файл справочника не существует или имеет неправильный формат. 
+        """
+    )
+
+
+def raise_file_save_exception():
+    """
+    Вызов исключения сохранения файла
+    """
+    raise FileOpenError(
+        """
+        Ошибка сохранения файла. 
+        """
+    )
 
 
 if __name__ == "__main__":

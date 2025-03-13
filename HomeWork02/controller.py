@@ -5,6 +5,10 @@ catalog = Catalog()
 
 
 def file_opened() -> bool:
+    """
+    Проверка: открыт ли файл?
+    :return: True/False
+    """
     if not catalog.get_catalog_file():
         alert_open_file()
         ret_value = False
@@ -23,12 +27,18 @@ def start_app():
         input_dig = get_digit()
         if input_dig == 1:
             # Открытие файла
-            catalog.open_file()
+            try:
+                catalog.open_file()
+            except Exception as e:
+                raise_file_open_exception()
             info_file_opened()
         elif input_dig == 2:
             # Сохранение файла
             if file_opened():
-                catalog.save_file()
+                try:
+                    catalog.save_file()
+                except Exception as e:
+                    raise_file_save_exception()
                 info_file_saved()
         elif input_dig == 3:
             # Показ всех контактов
@@ -60,6 +70,9 @@ def start_app():
         elif input_dig == 8:
             # Выход
             finish = True
+        elif input_dig == 0:
+            # Введена не цифра
+            alert_not_digit()
         else:
             # Неправильная цифра
             alert_wrong_digit()
