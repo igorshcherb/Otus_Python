@@ -1,5 +1,5 @@
-# import pytest
-# from Homework03.catalog import Catalog
+from Homework03.catalog import Catalog
+from Homework03.contact import Contact
 
 
 class TestCatalog:
@@ -7,7 +7,9 @@ class TestCatalog:
         """
         Тест добавления контакта
         """
-        pass
+        catalog = Catalog()
+        contact = Contact('AAA', '111', 'comment')
+        catalog.append_contact(contact)
 
     def test_search_contact(self):
         """
