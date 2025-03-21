@@ -1,8 +1,12 @@
-class FileOpenError(Exception):
+class ExceptFile(Exception):
     pass
 
 
-class FileSaveError(Exception):
+class FileOpenError(ExceptFile):
+    pass
+
+
+class FileSaveError(ExceptFile):
     pass
 
 

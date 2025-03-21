@@ -1,24 +1,10 @@
 from io import TextIOWrapper
+from typing import TextIO
+
+from contact import Contact
 
 # Имя файла каталога
 FILE_NAME = "catalog.txt"
-
-
-class Contact:
-    """
-    Класс контакта
-    """
-
-    def __init__(self, name: str, phone: str, comment: str):
-        """
-        Инициализация экземпляра класса
-        :param name: имя контакта
-        :param phone: номер телефона
-        :param comment: комментарий
-        """
-        self.name = name
-        self.phone = phone
-        self.comment = comment
 
 
 class Catalog:
@@ -47,14 +33,30 @@ class Catalog:
         """
         return self.__catalog_file
 
+    @staticmethod
+    def open_file_to_read() -> TextIO:
+        """
+        Открытие файла на чтение
+        """
+        file_read = open(FILE_NAME, "r", encoding="UTF-8")
+        return file_read
+
     def open_file(self) -> None:
         """
         Открытие файла справочника
         """
-        self.__catalog_file = open(FILE_NAME, "r", encoding="UTF-8")
+        self.__catalog_file = self.open_file_to_read()
         self.__catalog_list = [
             item.strip().split(";") for item in self.__catalog_file.readlines()
         ]
+
+    @staticmethod
+    def close_file(current_file: TextIO) -> None:
+        """
+        Закрытие файла
+        :rtype: object
+        """
+        current_file.close()
 
     def save_file(self) -> None:
         """
@@ -66,7 +68,7 @@ class Catalog:
         self.__catalog_file.close()
         catalog_file = open(FILE_NAME, "w", encoding="UTF-8")
         catalog_file.write(catalog_tmp)
-        catalog_file.close()
+        self.close_file(catalog_file)
 
     def append_contact(self, contact: Contact) -> None:
         """
@@ -80,11 +82,9 @@ class Catalog:
         :return: результат поиска
         """
         ret_value = None
-        found = False
         for cat_line in self.__catalog_list:
             if cat_line[0] == search_name:
                 ret_value = f"{cat_line[0]:<9} {cat_line[1]:<12} {cat_line[2]}"
-                found = True
                 break
         if not ret_value:
             ret_value = search_name + " - не найдено."
@@ -96,6 +96,7 @@ class Catalog:
         :return: результат изменения
         """
         found = False
+        ret_value = ""
         for cat_line in self.__catalog_list:
             if cat_line[0] == contact.name:
                 cat_line[1] = contact.phone
@@ -113,6 +114,7 @@ class Catalog:
         :return: результат удаления
         """
         found = False
+        ret_value = ""
         for cat_line in self.__catalog_list:
             if cat_line[0] == delete_name:
                 self.__catalog_list.remove(cat_line)

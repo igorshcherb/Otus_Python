@@ -1,15 +1,17 @@
 from view import *
-from model import Contact, Catalog
+from catalog import Catalog
+from contact import Contact
 
 catalog = Catalog()
 
 
-def file_opened() -> bool:
+def file_opened(current_catalog: Catalog = catalog) -> bool:
     """
     Проверка: открыт ли файл?
     :return: True/False
     """
-    if not catalog.get_catalog_file():
+
+    if not current_catalog.get_catalog_file():
         alert_open_file()
         ret_value = False
     else:
@@ -29,7 +31,7 @@ def start_app():
             # Открытие файла
             try:
                 catalog.open_file()
-            except Exception as e:
+            except Exception:
                 raise_file_open_exception()
             info_file_opened()
         elif input_dig == 2:
@@ -37,7 +39,7 @@ def start_app():
             if file_opened():
                 try:
                     catalog.save_file()
-                except Exception as e:
+                except Exception:
                     raise_file_save_exception()
                 info_file_saved()
         elif input_dig == 3:
