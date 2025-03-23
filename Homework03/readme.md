@@ -11,8 +11,8 @@
 ** [contact](contact.py)
 * тесты:   
 ** [test_catalog](test_catalog.py)   
-** [test_contact](test_contact.py)
-** [test_controller](test_controller.py)
+** [test_contact](test_contact.py)   
+** [test_controller](test_controller.py)   
 ### [Файл телефонного справочника](catalog.txt) ###
 ### [Пример тестирования программы (лог)](log.txt) ###
 
