@@ -1,10 +1,13 @@
 from io import TextIOWrapper
 from typing import TextIO
-
 from contact import Contact
+from pathlib import Path
 
 # Имя файла каталога
-FILE_NAME = "catalog.txt"
+FILE_NAME: str = "catalog.txt"
+NOT_FOUND: str = " - не найдено."
+TESTS_DIR: str = "tests"
+HOMEWORK_DIR: str = "Homework03"
 
 
 class Catalog:
@@ -34,18 +37,28 @@ class Catalog:
         return self.__catalog_file
 
     @staticmethod
-    def open_file_to_read() -> TextIO:
+    def get_current_filename() -> str:
+        path = Path.cwd()
+        if TESTS_DIR in str(path):
+            path = path.parent
+        if not HOMEWORK_DIR in str(path):
+            path = path / HOMEWORK_DIR
+        ret = str(path / FILE_NAME)
+        return ret
+
+    @staticmethod
+    def open_file_to_read(file_name: str) -> TextIO:
         """
         Открытие файла на чтение
         """
-        file_read = open(FILE_NAME, "r", encoding="UTF-8")
+        file_read = open(file_name, "r", encoding="UTF-8")
         return file_read
 
     def open_file(self) -> None:
         """
         Открытие файла справочника
         """
-        self.__catalog_file = self.open_file_to_read()
+        self.__catalog_file = self.open_file_to_read(self.get_current_filename())
         self.__catalog_list = [
             item.strip().split(";") for item in self.__catalog_file.readlines()
         ]
@@ -66,7 +79,8 @@ class Catalog:
         for row in self.__catalog_list:
             catalog_tmp = catalog_tmp + ";".join(row) + "\n"
         self.__catalog_file.close()
-        catalog_file = open(FILE_NAME, "w", encoding="UTF-8")
+        self.close_file(self.get_catalog_file())
+        catalog_file = open(self.get_current_filename(), "w", encoding="UTF-8")
         catalog_file.write(catalog_tmp)
         self.close_file(catalog_file)
 
@@ -75,6 +89,10 @@ class Catalog:
         Добавление контакта в список справочника
         """
         self.__catalog_list.append([contact.name, contact.phone, contact.comment])
+
+    @staticmethod
+    def get_not_found() -> str:
+        return NOT_FOUND
 
     def search_contact(self, search_name: str) -> str:
         """
@@ -87,7 +105,7 @@ class Catalog:
                 ret_value = f"{cat_line[0]:<9} {cat_line[1]:<12} {cat_line[2]}"
                 break
         if not ret_value:
-            ret_value = search_name + " - не найдено."
+            ret_value = search_name + self.get_not_found()
         return ret_value
 
     def update_contact(self, contact: Contact) -> str:

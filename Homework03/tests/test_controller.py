@@ -1,5 +1,8 @@
-from Homework03.controller import file_opened
-from Homework03.catalog import Catalog
+import sys
+
+sys.path.append("./Homework03")
+from controller import file_opened
+from catalog import Catalog
 
 
 class TestController:
@@ -12,5 +15,5 @@ class TestController:
         assert opened == False
         catalog.open_file()
         opened = file_opened(catalog)
-        assert opened == True
+        assert True == opened
         catalog.close_file(catalog.get_catalog_file())

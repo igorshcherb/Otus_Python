@@ -1,5 +1,8 @@
+import sys
+
+sys.path.append("./Homework03")
 import pytest
-from Homework03.contact import Contact
+from contact import Contact
 
 
 class TestContact:
