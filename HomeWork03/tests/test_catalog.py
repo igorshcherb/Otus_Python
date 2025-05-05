@@ -1,6 +1,6 @@
 import sys
 
-sys.path.append("./Homework03")
+sys.path.append("./HomeWork03")
 from catalog import Catalog
 from contact import Contact
 
@@ -17,9 +17,9 @@ class TestCatalog:
         found = False
         for cat_line in catalog.get_catalog_list():
             if (
-                cat_line[0] == contact.name
-                and cat_line[1] == contact.phone
-                and cat_line[2] == contact.comment
+                    cat_line[0] == contact.name
+                    and cat_line[1] == contact.phone
+                    and cat_line[2] == contact.comment
             ):
                 found = True
                 break
@@ -57,9 +57,9 @@ class TestCatalog:
         found = False
         for cat_line in catalog.get_catalog_list():
             if (
-                cat_line[0] == upd_contact.name
-                and cat_line[1] == upd_contact.phone
-                and cat_line[2] == upd_contact.comment
+                    cat_line[0] == upd_contact.name
+                    and cat_line[1] == upd_contact.phone
+                    and cat_line[2] == upd_contact.comment
             ):
                 found = True
                 break
@@ -80,9 +80,9 @@ class TestCatalog:
         found = False
         for cat_line in catalog.get_catalog_list():
             if (
-                cat_line[0] == contact.name
-                and cat_line[1] == contact.phone
-                and cat_line[2] == contact.comment
+                    cat_line[0] == contact.name
+                    and cat_line[1] == contact.phone
+                    and cat_line[2] == contact.comment
             ):
                 found = True
                 break
@@ -119,9 +119,9 @@ class TestCatalog:
         found = False
         for cat_line in catalog.get_catalog_list():
             if (
-                cat_line[0] == contact.name
-                and cat_line[1] == contact.phone
-                and cat_line[2] == contact.comment
+                    cat_line[0] == contact.name
+                    and cat_line[1] == contact.phone
+                    and cat_line[2] == contact.comment
             ):
                 found = True
                 break

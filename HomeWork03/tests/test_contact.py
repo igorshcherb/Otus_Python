@@ -1,6 +1,6 @@
 import sys
 
-sys.path.append("./Homework03")
+sys.path.append("./HomeWork03")
 import pytest
 from contact import Contact
 

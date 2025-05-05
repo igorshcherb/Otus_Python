@@ -7,7 +7,7 @@ from pathlib import Path
 FILE_NAME: str = "catalog.txt"
 NOT_FOUND: str = " - не найдено."
 TESTS_DIR: str = "tests"
-HOMEWORK_DIR: str = "Homework03"
+HOMEWORK_DIR: str = "HomeWork03"
 
 
 class Catalog:
