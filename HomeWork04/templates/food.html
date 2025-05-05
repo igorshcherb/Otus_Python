@@ -1,0 +1,13 @@
+{% extends 'foodbase.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+<h3>Код: {{ food.pk }}</h3>
+<h3>Наименование: {{ food.name }}</h3>
+<h3>Вес: {{ food.weight }}</h3>
+<h3>Цена: {{ food.price }}</h3>
+<h3>Описание: {{ food.description }}</h3>
+{% endblock %}

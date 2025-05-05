@@ -9,8 +9,8 @@ templates = Jinja2Templates(directory='templates')
 
 class FoodUpdate(BaseModel):
     name: str = Field(..., title='Food Name', max_length=20)
-    weight: float = Field(..., title='Food weight', ge=0, le=100_000)
-    price: float = Field(..., title='Food price', ge=0, le=100_000)
+    weight: float = Field(None, title='Food weight', ge=0, le=100_000)
+    price: float = Field(None, title='Food price', ge=0, le=100_000)
     description: str = Field(None, title='Description', max_length=1000)
 
 
@@ -45,10 +45,51 @@ foods = [
 
 # /list/
 @router.get("/list/")
-async def read_foods(request: Request):
+async def list_foods(request: Request):
     context = {
         'request': request,
         'title': 'Список продуктов',
         'foods': foods,
     }
     return templates.TemplateResponse('list.html', context=context)
+
+
+@router.get("/food/{food_pk}")
+async def read_food(food_pk: int, request: Request):
+    food = None
+    for food in foods:
+        if food.pk == food_pk:
+            break
+    context = {
+        'request': request,
+        'title': 'Пищевой продукт',
+        'food': food,
+    }
+    return templates.TemplateResponse('food.html', context=context)
+
+
+@router.post("/add/")
+async def add_food(food: Food):
+    foods.append(food)
+    return {"food": food}
+
+
+@router.put("/update/{food_pk}")
+async def update_food(food_pk: int, update_food: FoodUpdate):
+    for food in foods:
+        if food.pk == food_pk:
+            food.name = update_food.name
+            food.price = update_food.price
+            food.weight = update_food.weight
+            food.description = update_food.description
+            return {'Message': f'Продукт {food} обновлен'}
+    return {"Message": 'Продукт не найден'}
+
+
+@router.delete("/delete/{food_pk}")
+async def delete_product(food_pk: int):
+    for food in foods:
+        if food.pk == food_pk:
+            foods.remove(food)
+            return {'Message': f'Продукт {food} удален'}
+    return {"Message": 'Продукт не найден'}
