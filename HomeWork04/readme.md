@@ -12,15 +12,15 @@
 
 ## HTML-страницы: ###
 
-* [index.html](/templates/index.html)
-* [about.html](/templates/about.html)
-* [list.html](/templates/list.html)
-* [food.html](/templates/food.html)
+* [index.html](./templates/index.html)
+* [about.html](./templates/about.html)
+* [list.html](./templates/list.html)
+* [food.html](./templates/food.html)
 
 ### Шаблоны: ###
 
-* [foodbase.html](/templates/foodbase.html)
-* [listbase.html](/templates/listbase.html)
+* [foodbase.html](./templates/foodbase.html)
+* [listbase.html](./templates/listbase.html)
 
 
 
