@@ -75,13 +75,13 @@ async def add_food(food: Food):
 
 
 @router.put("/update/{food_pk}")
-async def update_food(food_pk: int, update_food: FoodUpdate):
+async def update_food(food_pk: int, upd_food: FoodUpdate):
     for food in foods:
         if food.pk == food_pk:
-            food.name = update_food.name
-            food.price = update_food.price
-            food.weight = update_food.weight
-            food.description = update_food.description
+            food.name = upd_food.name
+            food.price = upd_food.price
+            food.weight = upd_food.weight
+            food.description = upd_food.description
             return {'Message': f'Продукт {food} обновлен'}
     return {"Message": 'Продукт не найден'}
 
