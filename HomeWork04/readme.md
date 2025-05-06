@@ -8,7 +8,7 @@
 
 ### [Стартовый файл app.py](app.py) ###
 
-### [Роутер](/routers/item_routers.py) ###
+### [Роутер](./routers/item_routers.py) ###
 
 ## HTML-страницы: ###
 
