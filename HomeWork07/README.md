@@ -6,7 +6,13 @@
 
 
 
-### Запуск приложения
+### Запуск приложения ###  
 docker compose up -d   
 **[127.0.0.1:8000/docs](http://127.0.0.1:8000/docs#/)**
+
+### Результаты выполнения ###   
+![Docker-контейнеры](results/containers.jpg)   
+![Создание пользователя](results/create_user.jpg)   
+![Список пользователей](results/user_list.jpg)   
+
 
