@@ -11,8 +11,8 @@ docker compose up -d
 **[127.0.0.1:8000/docs](http://127.0.0.1:8000/docs#/)**
 
 ### Результаты выполнения ###   
-![Docker-контейнеры](results/containers.jpg "Docker-контейнеры")   
-![Создание пользователя](results/create_user.jpg "Создание пользователя")   
-![Список пользователей](results/user_list.jpg "Список пользователей")   
+![Docker-контейнеры](/results/containers.jpg "Docker-контейнеры")   
+![Создание пользователя](/results/create_user.jpg "Создание пользователя")   
+![Список пользователей](/results/user_list.jpg "Список пользователей")   
 
 
