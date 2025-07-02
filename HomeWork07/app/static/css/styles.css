@@ -1,0 +1,67 @@
+body {
+    background-color: #fdfdfd;
+}
+
+
+h1 {
+    margin: 20px;
+}
+
+ol {
+    padding: 20px;
+}
+
+.margin-alert {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 650px;
+    text-align: center;
+}
+
+.margin-el {
+    margin: 20px;
+}
+
+
+.green-task-color {
+    color: #0e7955;
+}
+
+
+btn:focus {
+    background-color: #007bff;
+    color: white;
+}
+
+
+.task-card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+
+.task-card .details {
+    flex-grow: 1;
+    max-width: 960px;
+}
+
+
+.task-card a {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+
+.task-card a:hover {
+    background-color: #0056b3;
+}
