@@ -1,6 +1,9 @@
 insert into store_app_category(name, description) 
   values ('Канцтовары', 'Ручки, тетрадки...');
 
+insert into store_app_category(name, description) 
+  values ('Продукты питания', 'Еда');
+
 
 insert into store_app_product(name, description, price, created_at, category_id)
   values('Ручка 1', 'Ручка синяя', 100, now(), 1);
@@ -19,6 +22,9 @@ insert into store_app_product(name, description, price, created_at, category_id)
 
 insert into store_app_product(name, description, price, created_at, category_id)
   values('Тетрадь 3', 'Тетрадь со сменными блоками', 400, now(), 1);
+
+insert into store_app_product(name, description, price, created_at, category_id)
+  values('Макароны', 'Макароны', 200, now(), 2);
 
 -- select * from store_app_category;
 -- select * from store_app_product;
