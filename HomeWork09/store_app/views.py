@@ -34,14 +34,14 @@ class ProductListView(ProductView, ListView):
 
 
 class ProductDetailView(ProductView, DetailView):
-    """Представление для отображения деталей продукта"""
+    """Представление для деталей продукта"""
 
     template_name = "store_app/product_detail.html"
     context_object_name = "product"
 
 
 class ProductCreateView(ProductView, CreateView):
-    """Представление для отображения страницы создания продукта"""
+    """Представление для страницы создания продукта"""
 
     template_name = "store_app/product_create.html"
     form_class = ProductModelForm
