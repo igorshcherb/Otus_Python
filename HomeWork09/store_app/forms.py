@@ -40,17 +40,17 @@ class ProductModelForm(forms.ModelForm):
         }
 
     def clean_name(self):
-        """Метод для проверки длины наименования продукта"""
+        """Проверка длины наименования продукта"""
         name = self.cleaned_data["name"]
         if len(name) < 3:
             raise forms.ValidationError(
-                "Наименование продукта должно быть менее 10 символов"
+                "Наименование продукта должно быть более 3 символов"
             )
         return name
 
     def clean_price(self):
-        """Метод для проверки цены продукта"""
+        """Проверка цены продукта"""
         price = self.cleaned_data["price"]
         if price <= 0:
-            raise forms.ValidationError("Цена продукта должно быть больше 0")
+            raise forms.ValidationError("Цена продукта должна быть больше 0")
         return price

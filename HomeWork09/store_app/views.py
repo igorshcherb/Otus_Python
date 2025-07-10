@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView
@@ -17,6 +17,33 @@ def home(request):
 def about(request):
     """Представление для страницы about"""
     return render(request, "store_app/about.html")
+
+
+def add_product(request):
+    if request.method == "POST":
+        form = ProductModelForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("product_list")
+    else:
+        form = ProductModelForm()
+
+    context = {"form": form, "title": "Добавить товар"}
+    return render(request, "store_app/product_create.html", context=context)
+
+
+def product_edit(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    if request.method == "POST":
+        form = ProductModelForm(request.POST, instance=product)
+        if form.is_valid():
+            form.save()
+            return redirect("product_list")
+    else:
+        form = ProductModelForm(instance=product)
+
+    context = {"form": form, "title": "Редактировать товар"}
+    return render(request, "store_app/product_edit.html", context=context)
 
 
 class ProductView:
@@ -38,24 +65,6 @@ class ProductDetailView(ProductView, DetailView):
 
     template_name = "store_app/product_detail.html"
     context_object_name = "product"
-
-
-class ProductCreateView(ProductView, CreateView):
-    """Представление для страницы создания продукта"""
-
-    template_name = "store_app/product_create.html"
-    form_class = ProductModelForm
-    success_url = reverse_lazy("product_list")
-
-    def form_valid(self, form):
-        response = super().form_valid(form)
-        updated_product.delay(
-            action_name=ActionName.created, product_name=form.instance.name
-        )
-        messages.success(
-            self.request, f'Продукт "{form.instance.name}" успешно создан!'
-        )
-        return response
 
 
 class ProductUpdateView(ProductView, UpdateView):
