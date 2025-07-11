@@ -9,6 +9,10 @@
 ```
 cd HomeWork10
 python manage.py runserver
+
+pytest store_app/tests/test_views.py::test_index_view -vv
+pytest storeapp/tests/test_views.py -vv
+pytest
 ```
 
 ### URLs ###
