@@ -1,13 +1,11 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.base import TemplateView
 from django.urls import reverse_lazy
 from django.contrib import messages
-from .models import Category, Product
+from .models import Product
 from .forms import ProductModelForm
-from .tasks import ActionName, updated_product
+from .tasks import add_product_logging
 
 
 class HomeTemplateView(TemplateView):
@@ -59,7 +57,7 @@ class ProductCreateView(ProductView, CreateView):
     success_url = reverse_lazy("product_list")
 
     def form_valid(self, form):
-        # print(form)
+        add_product_logging.delay(form.instance.name)
         messages.success(self.request, "Продукт успешно создан")
         return super().form_valid(form)
 
