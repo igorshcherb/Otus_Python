@@ -116,7 +116,7 @@ elif dbbs_command == "-b":
     str0 = f"""select q.code, q.query_text
         from queries_in_groups qin
          left join queries q on q.code = qin.query_code
-        where qin.group_code = '{dbbs_parameter_1}'"""
+        where qin.group_code = '{dbbs_parameter_1}' order by q.code"""
     dbbs_cur.execute(str0)
 
     # открытие второго курсов в служебной БД - для записи результатов тестирования

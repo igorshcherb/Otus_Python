@@ -107,9 +107,4 @@ insert into queries_in_groups(group_code, query_code)
 insert into queries_in_groups(group_code, query_code)
   values('gr_all', 'q31');
 
-insert into queries_in_groups(group_code, query_code)
-  values('gr_all', 'q32');
-
-insert into queries_in_groups(group_code, query_code)
-  values('gr_all', 'q33');
 

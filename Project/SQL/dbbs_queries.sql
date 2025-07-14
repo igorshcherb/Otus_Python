@@ -1,16 +1,27 @@
 select q.query_text
 from queries_in_groups qin
      left join queries q on q.code = qin.query_code
-where qin.group_code = 'gr1'
+where qin.group_code = 'gr1';
 
-delete from benchmarks
+select * from benchmarks;
 
-select * from benchmarks
+select * from benchmark_items;
 
-delete from benchmark_items
+select * from queries_in_groups;
 
-select * from benchmark_items
+select * from queries;
 
-select count(*) from benchmark_items
+select * from query_groups;
+
+--
+
+delete from benchmark_items;
+
+delete from benchmarks;
+
+delete from queries_in_groups;
+
+delete from queries;
+
 
 

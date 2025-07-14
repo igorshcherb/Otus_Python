@@ -83,7 +83,7 @@ insert into queries(code, description, query_text)
 
 insert into queries(code, description, query_text)
   values('q21', 'Соединение вложенным циклом',
-         'select * from tickets t join ticket_flights tf on tf.ticket_no = t.ticket_no where t.ticket_no in (''0005432312163'',''0005432312164''');
+         'select * from tickets t join ticket_flights tf on tf.ticket_no = t.ticket_no where t.ticket_no in (''0005432312163'',''0005432312164'')');
 
 insert into queries(code, description, query_text)
   values('q22', 'Вложенный цикл для левого соединения',
@@ -100,42 +100,33 @@ insert into queries(code, description, query_text)
           and exists (select * from seats s where s.aircraft_code = a.aircraft_code);');
 
 insert into queries(code, description, query_text)
-  values('q25', 'Мемоизация - кеширование повторяющихся данных внутреннего набора',
-         'select * from flights f join aircrafts_data a on f.aircraft_code = a.aircraft_code where f.flight_no = ''PG0003'';');
-
-insert into queries(code, description, query_text)
-  values('q26', 'Вложенный цикл в параллельных планах',
+  values('q25', 'Вложенный цикл в параллельных планах',
          'select t.passenger_name from tickets t join ticket_flights tf on tf.ticket_no = t.ticket_no
           join flights f on f.flight_id = tf.flight_id where f.flight_id = 12345;');
 
 insert into queries(code, description, query_text)
-  values('q27', 'Функциональные зависимости предикатов (dependencies)',
+  values('q26', 'Функциональные зависимости предикатов (dependencies)',
          'select * from flights where flight_no = ''PG0007'' and departure_airport = ''VKO'';');
 
 insert into queries(code, description, query_text)
-  values('q28', 'Наиболее частые комбинации значений (mcv)',
+  values('q27', 'Наиболее частые комбинации значений (mcv)',
          'select * from flights where departure_airport = ''LED'' and aircraft_code = ''321'';');
 
 insert into queries(code, description, query_text)
-  values('q29', 'Уникальные комбинации',
+  values('q28', 'Уникальные комбинации',
          'select distinct departure_airport, arrival_airport from flights;');
 
 insert into queries(code, description, query_text)
-  values('q30', 'Статистика по выражению',
+  values('q29', 'Статистика по выражению',
          'select * from flights where extract(month from scheduled_departure at time zone ''Europe/Moscow'') = 1;');
 
 insert into queries(code, description, query_text)
-  values('q31', 'Узел Materialize',
-         'select a1.city, a2.city from airports a1, airports a2 where a1.timezone = ''Europe/Moscow''
-          and abs(a2.coordinates[1]) > 66.652;');
-
-insert into queries(code, description, query_text)
-  values('q32', 'Материализация CTE',
+  values('q30', 'Материализация CTE',
          'with q as materialized (select f.flight_id, a.aircraft_code from flights f join aircrafts a on a.aircraft_code = f.aircraft_code) 
           select * from q join seats s on s.aircraft_code = q.aircraft_code where s.seat_no = ''1A'';');
 
 insert into queries(code, description, query_text)
-  values('q33', 'Рекурсивные запросы',
+  values('q31', 'Рекурсивные запросы',
          'with recursive r(n, airport_code) as (
           select 1, a.airport_code
           from airports a
