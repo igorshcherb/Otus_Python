@@ -53,13 +53,18 @@ comment on column connections.username is 'Имя пользователя';
 comment on column connections.password is 'Пароль';
 --------------------------------------------------------------------------------------------------------------------------------
 -- drop table benchmarks;
-create table benchmarks(id serial, name varchar(200), start_datetime timestamp);
+create table benchmarks(id serial, name varchar(200), query_group_code varchar(20), start_datetime timestamp);
 alter table benchmarks add constraint benchmarks_pk PRIMARY KEY (id);
+alter table benchmarks add constraint benchmarks_query_group_fk 
+  foreign key (query_group_code) references query_groups(code);
+alter table benchmarks add constraint benchmarks_name_uk unique (name);
 alter table benchmarks alter column name set not null;
+alter table benchmarks alter column query_group_code set not null;
 alter table benchmarks alter column start_datetime set not null;
 comment on table benchmarks is 'Тесты производительности';
 comment on column benchmarks.id is 'Идентификатор теста производительности';
 comment on column benchmarks.name is 'Наименование теста производительности';
+comment on column benchmarks.query_group_code is 'Код группы запросов, по которой выполняет тест';
 comment on column benchmarks.start_datetime is 'Дата и время начала теста производительности';
 --------------------------------------------------------------------------------------------------------------------------------
 -- drop table benchmark_items;

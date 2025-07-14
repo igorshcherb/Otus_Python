@@ -21,7 +21,7 @@
 
 ```
 cd project\util
-python dbbs_cli.py gr1
-
+python dbbs_cli.py -b gr1 benchmark01
+python dbbs_cli.py -r benchmark01
 ```
  
