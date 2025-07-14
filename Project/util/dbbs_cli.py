@@ -161,5 +161,7 @@ elif dbbs_command == "-r":
     for dbbs_row in dbbs_rows:
         str1 = "|".join(str(x).rjust(11, " ") for x in dbbs_row)
         print(str1)
+    test_cur.close()
+    dbbs_cur.close()
 else:
     print(f"Неправильная команда в командной строке: {dbbs_command}")
