@@ -20,9 +20,17 @@
 **Команды в терминале**
 
 ```
-cd project\util
+cd Project\util
 python dbbs_cli.py -b gr1 benchmark01
 python dbbs_cli.py -r benchmark01
 python dbbs_cli.py -h
+
+cd Project
+
+django-admin startproject dbbs_app
+django-admin startproject config .
+
+python manage.py runserver
+python manage.py startapp dbbs_app
 ```
  

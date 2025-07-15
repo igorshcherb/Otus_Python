@@ -1,22 +1,28 @@
 -- drop table query_groups;
-create table query_groups(code varchar(20), description varchar(200));
-alter table query_groups add constraint query_groups_pk primary key (code);
+create table query_groups(id serial, code varchar(20), description varchar(200));
+alter table query_groups add constraint query_groups_id_pk primary key (id);
+alter table query_groups add constraint query_groups_code_uk unique (code);
+alter table query_groups alter column code set not null;
 comment on table query_groups is 'Группы запросов';
+comment on column query_groups.id is 'Идентификатор группы запросов';
 comment on column query_groups.code is 'Код группы';
 comment on column query_groups.description is 'Описание группы'; 
 --------------------------------------------------------------------------------------------------------------------------------
 -- drop table queries;
-create table queries(code varchar(20), query_text varchar(500), description varchar(200));
-alter table queries add constraint queries_pk primary key (code);
-alter table queries add constraint queries_text_not_null (code);
+create table queries(id serial, code varchar(20), query_text varchar(500), description varchar(200));
+alter table queries add constraint queries_id_pk primary key (id);
+alter table queries add constraint queries_code_uk unique (code);
+alter table queries alter column code set not null;
 alter table queries alter column query_text set not null;
 comment on table queries is 'Запросы';
+comment on column queries.id is 'Идентификатор запроса';
 comment on column queries.code is 'Код запроса';
 comment on column queries.query_text is 'Текст запроса';
 comment on column queries.description is 'Описание запроса';
 --------------------------------------------------------------------------------------------------------------------------------
 -- drop table queries_in_groups;
-create table queries_in_groups(group_code varchar(20), query_code varchar(20));
+create table queries_in_groups(id serial, group_code varchar(20), query_code varchar(20));
+alter table queries_in_groups add constraint queries_in_groups_id_pk primary key (id);
 alter table queries_in_groups add constraint queries_in_groups_group_fk 
   foreign key (group_code) references query_groups(code);
 alter table queries_in_groups add constraint queries_in_groups_query_fk 
@@ -25,24 +31,31 @@ alter table queries_in_groups add constraint queries_in_groups_uk unique (group_
 alter table queries_in_groups alter column group_code set not null;
 alter table queries_in_groups alter column query_code set not null;
 comment on table queries_in_groups is 'Запросы в группах';
+comment on column queries_in_groups.id is 'Идентификатор запроса в группе';
 comment on column queries_in_groups.group_code is 'Код группы';
 comment on column queries_in_groups.query_code is 'Код запроса';
 --------------------------------------------------------------------------------------------------------------------------------
 -- drop table connection_types;
-create table connection_types(code varchar(20), description varchar(200));
-alter table connection_types add constraint connection_types_pk primary key (code);
+create table connection_types(id serial, code varchar(20), description varchar(200));
+alter table connection_types add constraint connection_types_id_pk primary key (id);
+alter table connection_types add constraint connection_types_code_uk unique (code);
+alter table connection_types alter column code set not null;
 comment on table connection_types is 'Типы соединений';
+comment on column connection_types.id is 'Идентификатор типа соединений';
 comment on column connection_types.code is 'Код типа соединений';
 comment on column connection_types.description is 'Описание типа соединений';
 --------------------------------------------------------------------------------------------------------------------------------
 -- drop table connections;
-create table connections(code varchar(20), type_code varchar(20), description varchar(200),
+create table connections(id serial, code varchar(20), type_code varchar(20), description varchar(200),
   host varchar(100), port varchar(10), database varchar(100), username varchar(100), password varchar(100));
-alter table connections add constraint connections_pk PRIMARY KEY (code);
-alter table connections add constraint connections_types_fk 
+alter table connections add constraint connections_id_pk primary key (id);
+alter table connections add constraint connections_code_uk unique (code);
+alter table connections add constraint connections_type_fk 
   foreign key (type_code) references connection_types(code);
+alter table connections alter column code set not null;
 alter table connections alter column type_code set not null;
 comment on table connections is 'Соединения';
+comment on column connections.id is 'Идентификатор соединения';
 comment on column connections.code is 'Код соединения';
 comment on column connections.type_code is 'Код типа соединения';
 comment on column connections.description is 'Описание соединения';
@@ -54,10 +67,10 @@ comment on column connections.password is 'Пароль';
 --------------------------------------------------------------------------------------------------------------------------------
 -- drop table benchmarks;
 create table benchmarks(id serial, name varchar(200), query_group_code varchar(20), start_datetime timestamp);
-alter table benchmarks add constraint benchmarks_pk PRIMARY KEY (id);
+alter table benchmarks add constraint benchmarks_pk primary key (id);
+alter table benchmarks add constraint benchmarks_name_uk unique (name);
 alter table benchmarks add constraint benchmarks_query_group_fk 
   foreign key (query_group_code) references query_groups(code);
-alter table benchmarks add constraint benchmarks_name_uk unique (name);
 alter table benchmarks alter column name set not null;
 alter table benchmarks alter column query_group_code set not null;
 alter table benchmarks alter column start_datetime set not null;
@@ -69,9 +82,11 @@ comment on column benchmarks.start_datetime is 'Дата и время нача�
 --------------------------------------------------------------------------------------------------------------------------------
 -- drop table benchmark_items;
 create table benchmark_items(id bigserial, benchmark_id integer, query_code varchar(20), start_datetime timestamp, result float);
-alter table benchmark_items add constraint benchmark_items_pk PRIMARY KEY (id);
-alter table benchmark_items add constraint benchmark_items_fk 
+alter table benchmark_items add constraint benchmark_items_pk primary key (id);
+alter table benchmark_items add constraint benchmark_items_benchmark_id_fk 
   foreign key (benchmark_id) references benchmarks(id) on delete cascade;
+alter table benchmark_items add constraint benchmark_items_query_code_fk 
+  foreign key (query_code) references queries(code);
 alter table benchmark_items alter column benchmark_id set not null;
 alter table benchmark_items alter column query_code set not null;
 alter table benchmark_items alter column start_datetime set not null;
