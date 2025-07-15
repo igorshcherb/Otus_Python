@@ -113,10 +113,9 @@ elif dbbs_command == "-b":
     dbbs_cur.execute(str1)
 
     # получение запросов заданной группы из служебной БД
-    str0 = f"""select q.code, q.query_text
-        from queries_in_groups qin
-         left join queries q on q.code = qin.query_code
-        where qin.group_code = '{dbbs_parameter_1}' order by q.code"""
+    str0 = f"""select query_code, query_text
+        from queries_in_groups_v
+        where group_code = '{dbbs_parameter_1}' order by query_code"""
     dbbs_cur.execute(str0)
 
     # открытие второго курсов в служебной БД - для записи результатов тестирования
@@ -154,8 +153,8 @@ elif dbbs_command == "-b":
 elif dbbs_command == "-r":
     print("Код запроса|Дата и время              | Результат, мс")
     print("-----------------------------------------------------")
-    str0 = f"""select query_code, start_datetime, result from benchmark_items where benchmark_id =
-           (select id from benchmarks where name = '{dbbs_parameter_1}')"""
+    str0 = f"""select query_code, start_datetime, result from benchmark_items_v 
+               where benchmark_name = '{dbbs_parameter_1}'"""
     dbbs_cur.execute(str0)
     dbbs_rows = dbbs_cur.fetchall()
     for dbbs_row in dbbs_rows:
