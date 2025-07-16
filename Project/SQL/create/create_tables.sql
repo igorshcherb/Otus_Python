@@ -24,9 +24,9 @@ comment on column queries.description is 'Описание запроса';
 create table queries_in_groups(id serial, group_code varchar(20), query_code varchar(20));
 alter table queries_in_groups add constraint queries_in_groups_id_pk primary key (id);
 alter table queries_in_groups add constraint queries_in_groups_group_fk 
-  foreign key (group_code) references query_groups(code);
+  foreign key (group_code) references query_groups(code) on delete cascade;
 alter table queries_in_groups add constraint queries_in_groups_query_fk 
-  foreign key (query_code) references queries(code);
+  foreign key (query_code) references queries(code) on delete cascade;
 alter table queries_in_groups add constraint queries_in_groups_uk unique (group_code, query_code);
 alter table queries_in_groups alter column group_code set not null;
 alter table queries_in_groups alter column query_code set not null;
@@ -66,18 +66,23 @@ comment on column connections.username is 'Имя пользователя';
 comment on column connections.password is 'Пароль';
 --------------------------------------------------------------------------------------------------------------------------------
 -- drop table benchmarks;
-create table benchmarks(id serial, name varchar(200), query_group_code varchar(20), start_datetime timestamp);
+create table benchmarks(id serial, name varchar(200), query_group_code varchar(20), connection_code varchar(20),
+  start_datetime timestamp);
 alter table benchmarks add constraint benchmarks_pk primary key (id);
 alter table benchmarks add constraint benchmarks_name_uk unique (name);
 alter table benchmarks add constraint benchmarks_query_group_fk 
   foreign key (query_group_code) references query_groups(code);
+alter table benchmarks add constraint benchmarks_connection_code_fk 
+  foreign key (connection_code) references connections(code);
 alter table benchmarks alter column name set not null;
 alter table benchmarks alter column query_group_code set not null;
+alter table benchmarks alter column connection_code set not null;
 alter table benchmarks alter column start_datetime set not null;
 comment on table benchmarks is 'Тесты производительности';
 comment on column benchmarks.id is 'Идентификатор теста производительности';
 comment on column benchmarks.name is 'Наименование теста производительности';
-comment on column benchmarks.query_group_code is 'Код группы запросов, по которой выполняет тест';
+comment on column benchmarks.query_group_code is 'Код группы запросов, по которой выполняется тест';
+comment on column benchmarks.connection_code is 'Код соединения, по которому выполняется тест';
 comment on column benchmarks.start_datetime is 'Дата и время начала теста производительности';
 --------------------------------------------------------------------------------------------------------------------------------
 -- drop table benchmark_items;
