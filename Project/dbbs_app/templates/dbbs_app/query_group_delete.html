@@ -3,14 +3,14 @@
 {% block title %} {{ title }} {% endblock %}
 
 {% block content %}
-<h1>Вы точно хотите удалить запрос {{ query.code }}?</h1>
+<h1>Вы точно хотите удалить группу запросов {{ query_group.code }}?</h1>
 
 <form method="post" class="mt-4">
     {% csrf_token %}
     {{ form.as_p }}
 
     <div style="margin-bottom: 20px; text-align: right;">
-        <a href="{% url 'query_list' %}" class="btn btn-secondary">Отмена</a>
+        <a href="{% url 'query_group_list' %}" class="btn btn-secondary">Отмена</a>
         <button type="submit" class="btn btn-danger">Удалить</button>
     </div>
 </form>

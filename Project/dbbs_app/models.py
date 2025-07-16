@@ -20,16 +20,17 @@ class Query(models.Model):
 
     class Meta:
         db_table = "queries"
+        ordering = ["id"]
 
     def __str__(self):
         return self.code
 
 
 class QueryInGroup(models.Model):
-    group_code = models.ForeignKey(
+    query_group = models.ForeignKey(
         "QueryGroup", on_delete=models.CASCADE, related_name="queries_in_groups"
     )
-    query_code = models.ForeignKey(
+    query = models.ForeignKey(
         "Query", on_delete=models.CASCADE, related_name="queries_in_groups"
     )
 
@@ -37,7 +38,7 @@ class QueryInGroup(models.Model):
         db_table = "queries_in_groups"
 
     def __str__(self):
-        return f"{self.group_code} {self.query_code}"
+        return f"{self.query_group_id.code} {self.query_id.code}"
 
 
 class ConnectionType(models.Model):
@@ -53,7 +54,7 @@ class ConnectionType(models.Model):
 
 class Connection(models.Model):
     code = models.CharField(max_length=20)
-    type_code = models.ForeignKey(
+    connection_type = models.ForeignKey(
         "ConnectionType", on_delete=models.PROTECT, related_name="connections"
     )
     description = models.CharField(max_length=200)
@@ -72,10 +73,10 @@ class Connection(models.Model):
 
 class Benchmark(models.Model):
     name = models.CharField(max_length=200)
-    query_group_code = models.ForeignKey(
+    query_group = models.ForeignKey(
         "QueryGroup", on_delete=models.PROTECT, related_name="benchmarks"
     )
-    connection_code = models.ForeignKey(
+    connection = models.ForeignKey(
         "Connection", on_delete=models.PROTECT, related_name="benchmarks"
     )
     start_datetime = models.DateTimeField(auto_now_add=True)
@@ -88,10 +89,10 @@ class Benchmark(models.Model):
 
 
 class BenchmarkItem(models.Model):
-    benchmark_id = models.ForeignKey(
+    benchmark = models.ForeignKey(
         "Benchmark", on_delete=models.CASCADE, related_name="benchmark_items"
     )
-    query_code = models.ForeignKey(
+    query = models.ForeignKey(
         "Query", on_delete=models.PROTECT, related_name="benchmark_items"
     )
     start_datetime = models.DateTimeField(auto_now_add=True)

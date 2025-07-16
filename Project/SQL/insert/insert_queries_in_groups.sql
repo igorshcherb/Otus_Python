@@ -1,110 +1,103 @@
--- select * from query_groups;
-
-insert into query_groups(code, description) 
-  values('gr1', 'Первая (тестовая) группа запросов');
-
-insert into query_groups(code, description) 
-  values('gr_all', 'Группа, содержащая все запросы');
---
 -- select * from queries_in_groups;
+-- delete from queries_in_groups;
 --
-insert into queries_in_groups(group_code, query_code)
-  values('gr1', 'q01');
+insert into queries_in_groups(query_group_id, query_id)
+  values((select id from query_groups where code = 'gr1'), (select id from queries where code = 'q01'));
 
-insert into queries_in_groups(group_code, query_code)
-  values('gr1', 'q02');
+insert into queries_in_groups(query_group_id, query_id)
+  values((select id from query_groups where code = 'gr1'), (select id from queries where code = 'q02'));
 --
-insert into queries_in_groups(group_code, query_code)
-  values('gr_all', 'q01');
+insert into queries_in_groups(query_group_id, query_id)
+  values((select id from query_groups where code = 'gr_all'), (select id from queries where code = 'q01'));
 
-insert into queries_in_groups(group_code, query_code)
-  values('gr_all', 'q02');
+insert into queries_in_groups(query_group_id, query_id)
+  values((select id from query_groups where code = 'gr_all'), (select id from queries where code = 'q02'));
 
-insert into queries_in_groups(group_code, query_code)
-  values('gr_all', 'q03');
+insert into queries_in_groups(query_group_id, query_id)
+  values((select id from query_groups where code = 'gr_all'), (select id from queries where code = 'q03'));
 
-insert into queries_in_groups(group_code, query_code)
-  values('gr_all', 'q04');
+insert into queries_in_groups(query_group_id, query_id)
+  values((select id from query_groups where code = 'gr_all'), (select id from queries where code = 'q04'));
 
-insert into queries_in_groups(group_code, query_code)
-  values('gr_all', 'q05');
+insert into queries_in_groups(query_group_id, query_id)
+  values((select id from query_groups where code = 'gr_all'), (select id from queries where code = 'q05'));
 
-insert into queries_in_groups(group_code, query_code)
-  values('gr_all', 'q06');
+insert into queries_in_groups(query_group_id, query_id)
+  values((select id from query_groups where code = 'gr_all'), (select id from queries where code = 'q06'));
 
-insert into queries_in_groups(group_code, query_code)
-  values('gr_all', 'q07');
+insert into queries_in_groups(query_group_id, query_id)
+  values((select id from query_groups where code = 'gr_all'), (select id from queries where code = 'q07'));
 
-insert into queries_in_groups(group_code, query_code)
-  values('gr_all', 'q08');
+insert into queries_in_groups(query_group_id, query_id)
+  values((select id from query_groups where code = 'gr_all'), (select id from queries where code = 'q08'));
 
-insert into queries_in_groups(group_code, query_code)
-  values('gr_all', 'q09');
+insert into queries_in_groups(query_group_id, query_id)
+  values((select id from query_groups where code = 'gr_all'), (select id from queries where code = 'q09'));
 
-insert into queries_in_groups(group_code, query_code)
-  values('gr_all', 'q10');
+insert into queries_in_groups(query_group_id, query_id)
+  values((select id from query_groups where code = 'gr_all'), (select id from queries where code = 'q10'));
 
-insert into queries_in_groups(group_code, query_code)
-  values('gr_all', 'q11');
+insert into queries_in_groups(query_group_id, query_id)
+  values((select id from query_groups where code = 'gr_all'), (select id from queries where code = 'q11'));
 
-insert into queries_in_groups(group_code, query_code)
-  values('gr_all', 'q12');
+insert into queries_in_groups(query_group_id, query_id)
+  values((select id from query_groups where code = 'gr_all'), (select id from queries where code = 'q12'));
 
-insert into queries_in_groups(group_code, query_code)
-  values('gr_all', 'q13');
+insert into queries_in_groups(query_group_id, query_id)
+  values((select id from query_groups where code = 'gr_all'), (select id from queries where code = 'q13'));
 
-insert into queries_in_groups(group_code, query_code)
-  values('gr_all', 'q14');
+insert into queries_in_groups(query_group_id, query_id)
+  values((select id from query_groups where code = 'gr_all'), (select id from queries where code = 'q14'));
 
-insert into queries_in_groups(group_code, query_code)
-  values('gr_all', 'q15');
+insert into queries_in_groups(query_group_id, query_id)
+  values((select id from query_groups where code = 'gr_all'), (select id from queries where code = 'q15'));
 
-insert into queries_in_groups(group_code, query_code)
-  values('gr_all', 'q16');
+insert into queries_in_groups(query_group_id, query_id)
+  values((select id from query_groups where code = 'gr_all'), (select id from queries where code = 'q16'));
 
-insert into queries_in_groups(group_code, query_code)
-  values('gr_all', 'q17');
+insert into queries_in_groups(query_group_id, query_id)
+  values((select id from query_groups where code = 'gr_all'), (select id from queries where code = 'q17'));
 
-insert into queries_in_groups(group_code, query_code)
-  values('gr_all', 'q18');
+insert into queries_in_groups(query_group_id, query_id)
+  values((select id from query_groups where code = 'gr_all'), (select id from queries where code = 'q18'));
 
-insert into queries_in_groups(group_code, query_code)
-  values('gr_all', 'q19');
+insert into queries_in_groups(query_group_id, query_id)
+  values((select id from query_groups where code = 'gr_all'), (select id from queries where code = 'q19'));
 
-insert into queries_in_groups(group_code, query_code)
-  values('gr_all', 'q20');
+insert into queries_in_groups(query_group_id, query_id)
+  values((select id from query_groups where code = 'gr_all'), (select id from queries where code = 'q20'));
 
-insert into queries_in_groups(group_code, query_code)
-  values('gr_all', 'q21');
+insert into queries_in_groups(query_group_id, query_id)
+  values((select id from query_groups where code = 'gr_all'), (select id from queries where code = 'q21'));
 
-insert into queries_in_groups(group_code, query_code)
-  values('gr_all', 'q22');
+insert into queries_in_groups(query_group_id, query_id)
+  values((select id from query_groups where code = 'gr_all'), (select id from queries where code = 'q22'));
 
-insert into queries_in_groups(group_code, query_code)
-  values('gr_all', 'q23');
+insert into queries_in_groups(query_group_id, query_id)
+  values((select id from query_groups where code = 'gr_all'), (select id from queries where code = 'q23'));
 
-insert into queries_in_groups(group_code, query_code)
-  values('gr_all', 'q24');
+insert into queries_in_groups(query_group_id, query_id)
+  values((select id from query_groups where code = 'gr_all'), (select id from queries where code = 'q24'));
 
-insert into queries_in_groups(group_code, query_code)
-  values('gr_all', 'q25');
+insert into queries_in_groups(query_group_id, query_id)
+  values((select id from query_groups where code = 'gr_all'), (select id from queries where code = 'q25'));
 
-insert into queries_in_groups(group_code, query_code)
-  values('gr_all', 'q26');
+insert into queries_in_groups(query_group_id, query_id)
+  values((select id from query_groups where code = 'gr_all'), (select id from queries where code = 'q26'));
 
-insert into queries_in_groups(group_code, query_code)
-  values('gr_all', 'q27');
+insert into queries_in_groups(query_group_id, query_id)
+  values((select id from query_groups where code = 'gr_all'), (select id from queries where code = 'q27'));
 
-insert into queries_in_groups(group_code, query_code)
-  values('gr_all', 'q28');
+insert into queries_in_groups(query_group_id, query_id)
+  values((select id from query_groups where code = 'gr_all'), (select id from queries where code = 'q28'));
 
-insert into queries_in_groups(group_code, query_code)
-  values('gr_all', 'q29');
+insert into queries_in_groups(query_group_id, query_id)
+  values((select id from query_groups where code = 'gr_all'), (select id from queries where code = 'q29'));
 
-insert into queries_in_groups(group_code, query_code)
-  values('gr_all', 'q30');
+insert into queries_in_groups(query_group_id, query_id)
+  values((select id from query_groups where code = 'gr_all'), (select id from queries where code = 'q30'));
 
-insert into queries_in_groups(group_code, query_code)
-  values('gr_all', 'q31');
+insert into queries_in_groups(query_group_id, query_id)
+  values((select id from query_groups where code = 'gr_all'), (select id from queries where code = 'q31'));
 
 

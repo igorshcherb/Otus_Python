@@ -3,18 +3,15 @@
 {% block title %} {{ title }} {% endblock %}
 
 {% block content %}
-<h1>Запрос "{{ query.code }}"</h1>
+<h1>Запрос "{{ query.id }}"</h1>
 
-<p class="card-text"><b>Текст запроса:</b> {{ query.query_test }}</p>
-                <p class="card-text"><b>JОписание:</b> {{ query.description }}</p>
-
-
-<p><b>Текст запроса:</b> {{ query.query_test }}</p>
-<p><b>Описание:</b> {{ query.description }}</p>
+<p class="card-text"><b>Код:</b> {{ query.code }}</p>
+<p class="card-text"><b>Текст запроса:</b> {{ query.query_text }}</p>
+<p class="card-text"><b>Описание:</b> {{ query.description }}</p>
 
 <div style="margin-bottom: 20px; text-align: right;">
-    <a class="btn btn-light" href="{% url 'product_list' %}">К списку продуктов</a>
-    <a href="{% url 'product_edit' product.id %}" class="btn btn-primary" role="button">Редактировать</a>
-    <a href="{% url 'product_delete' product.id %}" class="btn btn-danger" role="button">Удалить</a>
+    <a class="btn btn-light" href="{% url 'query_list' %}">К списку запросов</a>
+    <a href="{% url 'query_edit' query.id %}" class="btn btn-primary" role="button">Редактировать</a>
+    <a href="{% url 'query_delete' query.id %}" class="btn btn-danger" role="button">Удалить</a>
 </div>
 {% endblock %}

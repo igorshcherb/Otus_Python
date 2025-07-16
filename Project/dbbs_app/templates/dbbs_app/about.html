@@ -1,11 +1,12 @@
-{% extends "blog_app/base.html" %}
+{% extends "dbbs_app/base.html" %}
 
-{% block title %} Страница о нас {% endblock %}
+{% block title %} {{ title }} {% endblock %}
 
 {% block content %}
-        <h1>Страница о нас</h1>
-        <p>Страница сайта с информацией о компаниях.</p>
+<h1>{{ title }}</h1>
+<p>{{ description }}</p>
 {% endblock %}
+
 
 
 

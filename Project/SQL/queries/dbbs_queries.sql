@@ -14,7 +14,7 @@ delete from benchmarks;
 delete from queries_in_groups;
 delete from queries;
 --
-select * from compare_benchmarks_v where benchmark_name_1 = 'benchmark01' and benchmark_name_2 = 'benchmark09'
+select * from compare_benchmarks_v where benchmark_name_1 = 'benchmark01' and benchmark_name_2 = 'benchmark12'
 
 
 

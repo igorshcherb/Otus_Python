@@ -31,17 +31,20 @@ def get_params_from_db(p_connection, p_code: str) -> dict:
     Получение параметров для соединения с БД, в которой требуется провести тесты производительности
     """
     v_cur = p_connection.cursor()
+
+    print(p_code)
+
     v_cur.execute(
-        "select type_code, host, port, database, username, password from connections where code = %s",
-        p_code,
+        "select host, port, database, username, password from connections where code = %s",
+        (p_code,),
     )
     row1 = v_cur.fetchone()
     v_params = {
-        "host": row1[1],
-        "port": row1[2],
-        "database": row1[3],
-        "user": row1[5],
-        "password": row1[5],
+        "host": row1[0],
+        "port": row1[1],
+        "database": row1[2],
+        "user": row1[3],
+        "password": row1[4],
     }
     return v_params
 
@@ -61,8 +64,9 @@ def print_help():
     print("        <параметр_2> - наименование теста производительности № 2")
     print("   -h - вывести помощь по этой утилите")
     print("Например:")
-    print("   python dbbs_cli.py -b gr1 benchmark01")
+    print("   python dbbs_cli.py -b gr1 benchmark01 pg1")
     print("   python dbbs_cli.py -r benchmark01")
+    print("   python dbbs_cli.py -c benchmark01 benchmark02")
     print("   python dbbs_cli.py -h")
 
 
@@ -112,7 +116,13 @@ elif dbbs_command == "-b":
     current_datetime = datetime.now()
     str0 = "select insert_benchmark(%s, %s, %s, %s::timestamp);"
     dbbs_cur.execute(
-        str0, (dbbs_parameter_2, dbbs_parameter_1, dbbs_parameter_3, current_datetime)
+        str0,
+        (
+            dbbs_parameter_2,
+            dbbs_parameter_1,
+            dbbs_parameter_3,
+            current_datetime,
+        ),
     )
     dbbs_row = dbbs_cur.fetchone()
     dbbs_conn.commit()
@@ -122,7 +132,7 @@ elif dbbs_command == "-b":
     str0 = """select query_code, query_text
         from queries_in_groups_v
         where group_code = %s order by query_code"""
-    dbbs_cur.execute(str0, dbbs_parameter_1)
+    dbbs_cur.execute(str0, (dbbs_parameter_1,))
 
     # открытие второго курсов в служебной БД - для записи результатов тестирования
     dbbs_cur_2 = dbbs_conn.cursor()
@@ -149,7 +159,12 @@ elif dbbs_command == "-b":
                 command_str = "call insert_benchmark_item(%s, %s, %s::timestamp, %s);"
                 dbbs_cur_2.execute(
                     command_str,
-                    (benchmark_id, dbbs_row[0], current_datetime, time_value),
+                    (
+                        benchmark_id,
+                        dbbs_row[0],
+                        current_datetime,
+                        time_value,
+                    ),
                 )
                 dbbs_conn.commit()
         print(f"Запрос: {dbbs_row[0]}")
@@ -164,7 +179,7 @@ elif dbbs_command == "-r":
     print("-----------------------------------------------------")
     str0 = """select query_code, start_datetime, result from benchmark_items_v 
                where benchmark_name = %s"""
-    dbbs_cur.execute(str0, dbbs_parameter_1)
+    dbbs_cur.execute(str0, (dbbs_parameter_1,))
     dbbs_rows = dbbs_cur.fetchall()
     for dbbs_row in dbbs_rows:
         str1 = "|".join(str(x).rjust(11, " ") for x in dbbs_row)
@@ -177,7 +192,13 @@ elif dbbs_command == "-c":
 
     str0 = """select query_code_1, result_1, result_2, diff from compare_benchmarks_v 
               where benchmark_name_1 = %s and benchmark_name_2 = %s"""
-    dbbs_cur.execute(str0, (dbbs_parameter_1, dbbs_parameter_2))
+    dbbs_cur.execute(
+        str0,
+        (
+            dbbs_parameter_1,
+            dbbs_parameter_2,
+        ),
+    )
     dbbs_rows = dbbs_cur.fetchall()
     for dbbs_row in dbbs_rows:
         str1 = "|".join(str(x).rjust(11, " ") for x in dbbs_row)

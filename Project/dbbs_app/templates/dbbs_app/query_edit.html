@@ -8,9 +8,9 @@
 <form method="post" class="mt-4">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit" class="btn btn-primary">Сохранить товар</button>
+    <button type="submit" class="btn btn-primary">Сохранить запрос</button>
 </form>
 
-<a href="{% url 'product_list' %}" class="btn btn-secondary mt-3">Назад к списку</a>
+<a href="{% url 'query_list' %}" class="btn btn-secondary mt-3">Назад к списку</a>
 
 {% endblock %}

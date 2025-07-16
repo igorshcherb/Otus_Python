@@ -3,26 +3,26 @@
 {% block title %} {{ title }} {% endblock %}
 
 {% block content %}
-<h1>Список запросов</h1>
+<h1>Список групп запросов</h1>
 <div style="margin-bottom: 20px; text-align: right">
-    <a href="/query_create/" class="btn btn-primary" role="button">Создать запрос</a>
+    <a href="/query_group_create/" class="btn btn-primary" role="button">Создать группу запросов</a>
 </div>
 <ul>
-    {% for query in queries %}
+    {% for query_group in query_groups %}
     <li style="margin-bottom: 20px;" class="list-group-item">
         <div class="card">
-            <h5 class="card-header">Запрос #{{ query.id }}</h5>
+            <h5 class="card-header">Группа запросов #{{ query_group.id }}</h5>
             <div class="card-body">
-                <h5 class="card-title"><a href="{% url 'query_detail' query.pk %}"><h4>{{ query.code }}</h4></a>
+                <h5 class="card-title"><a href="{% url 'query_group_detail' query_group.pk %}">
+                    <h4>{{ query_group.code }}</h4></a>
                 </h5>
                 <br>
-                <p class="card-text"><b>Текст запроса:</b> {{ query.query_text }}</p>
-                <p class="card-text"><b>Описание:</b> {{ query.description }}</p>
+                <p class="card-text"><b>Описание:</b> {{ query_group.description }}</p>
             </div>
         </div>
     </li>
     {% empty %}
-    <li class="list-group-item">Нет запросов</li>
+    <li class="list-group-item">Нет групп запросов</li>
     {% endfor %}
 </ul>
 
