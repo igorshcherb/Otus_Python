@@ -13,7 +13,7 @@ from django.views.generic import (
 from django.views.generic.base import TemplateView
 from django.urls import reverse_lazy
 from django.contrib import messages
-from .models import Query, QueryGroup, QueryInGroup
+from .models import Query, QueryGroup, QueryInGroup, Benchmark, BenchmarkItem
 
 from .forms import QueryModelForm, QueryGroupModelForm, QueryInGroupModelForm
 
@@ -55,7 +55,7 @@ class QueryListView(QueryView, ListView):
 
     template_name = "dbbs_app/query_list.html"
     context_object_name = "queries"
-    paginate_by = 5
+    paginate_by = 3
 
 
 class QueryDetailView(QueryView, DetailView):
@@ -111,7 +111,7 @@ class QueryGroupListView(QueryGroupView, ListView):
 
     template_name = "dbbs_app/query_group_list.html"
     context_object_name = "query_groups"
-    paginate_by = 5
+    paginate_by = 3
 
 
 class QueryGroupDetailView(QueryGroupView, DetailView):
@@ -167,7 +167,7 @@ class QueryInGroupListView(QueryInGroupView, ListView):
 
     template_name = "dbbs_app/query_in_group_list.html"
     context_object_name = "queries_in_groups"
-    paginate_by = 5
+    paginate_by = 3
 
 
 class QueryInGroupDetailView(QueryInGroupView, DetailView):
@@ -210,3 +210,28 @@ class QueryInGroupCreateView(QueryInGroupView, CreateView):
     def form_valid(self, form):
         messages.success(self.request, "Запрос успешно добавлен в группу")
         return super().form_valid(form)
+
+
+class BenchmarkListView(ListView):
+    """Представление для списка тестов производительности"""
+
+    model = Benchmark
+    template_name = "dbbs_app/benchmark_list.html"
+    context_object_name = "benchmarks"
+    paginate_by = 3
+
+
+class BenchmarkItemListView(ListView):
+    """Представление для списка элементов тестов производительности"""
+
+    model = BenchmarkItem
+    template_name = "dbbs_app/benchmark_item_list.html"
+    context_object_name = "benchmark_items"
+    paginate_by = 3
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        benchmark = self.kwargs.get("benchmark")
+        if benchmark:
+            queryset = queryset.filter(benchmark=benchmark)
+        return queryset

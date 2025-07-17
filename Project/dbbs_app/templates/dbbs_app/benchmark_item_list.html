@@ -1,0 +1,70 @@
+{% extends 'dbbs_app/base.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %}
+<h1>Список элементов тестов производительности</h1>
+<ul>
+    {% for benchmark_item in benchmark_items %}
+    <li style="margin-bottom: 20px;" class="list-group-item">
+        <div class="card">
+            <h5 class="card-header">Элемент теста производительности #{{ benchmark_item.id }}</h5>
+            <div class="card-body">
+                <p class="card-text"><b>Тест производительности:</b> {{ benchmark_item.benchmark }}</p>
+                <p class="card-text"><b>Запрос:</b> {{ benchmark_item.query }}</p>
+                <p class="card-text"><b>Дата и время начала:</b> {{ benchmark_item.start_datetime }}</p>
+                <p class="card-text"><b>Результат, мс:</b> {{ benchmark_item.result }}</p>
+            </div>
+        </div>
+    </li>
+    {% empty %}
+    <li class="list-group-item">Нет тестов производительности</li>
+    {% endfor %}
+</ul>
+
+<!-- Навигация пагинации -->
+{% if is_paginated %}
+<nav aria-label="Навигация по страницам">
+    <ul class="pagination justify-content-center mt-4">
+        <!-- Кнопка "Назад" -->
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Назад">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span class="page-link">&laquo;</span>
+        </li>
+        {% endif %}
+
+        <!-- Номера страниц -->
+        {% for num in paginator.page_range %}
+        {% if num == page_obj.number %}
+        <li class="page-item active">
+            <span class="page-link">{{ num }}</span>
+        </li>
+        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+
+        <!-- Кнопка "Вперёд" -->
+        {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Вперёд">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span class="page-link">&raquo;</span>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
+{% endblock %}

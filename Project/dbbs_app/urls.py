@@ -63,4 +63,15 @@ urlpatterns = [
         views.QueryInGroupCreateView.as_view(),
         name="query_in_group_create",
     ),
+    # benchmarks
+    path(
+        "benchmarks/",
+        views.BenchmarkListView.as_view(),
+        name="benchmark_list",
+    ),
+    path(
+        "benchmark_items/<benchmark>/",
+        views.BenchmarkItemListView.as_view(),
+        name="benchmark_item_list",
+    ),
 ]

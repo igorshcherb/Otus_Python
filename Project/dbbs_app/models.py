@@ -38,7 +38,7 @@ class QueryInGroup(models.Model):
         db_table = "queries_in_groups"
 
     def __str__(self):
-        return f"{self.query_group_id.code} {self.query_id.code}"
+        return f"{self.query_group.code} {self.query.code}"
 
 
 class ConnectionType(models.Model):
@@ -83,6 +83,7 @@ class Benchmark(models.Model):
 
     class Meta:
         db_table = "benchmarks"
+        ordering = ["id"]
 
     def __str__(self):
         return self.name
@@ -100,6 +101,7 @@ class BenchmarkItem(models.Model):
 
     class Meta:
         db_table = "benchmark_items"
+        ordering = ["id"]
 
     def __str__(self):
-        return self.pk
+        return str(self.pk)
