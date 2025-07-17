@@ -74,4 +74,10 @@ urlpatterns = [
         views.BenchmarkItemListView.as_view(),
         name="benchmark_item_list",
     ),
+    path(
+        "compare_benchmarks/<benchmark_name_1>/<benchmark_name_2>",
+        views.CompareBenchmarkListView.as_view(),
+        name="compare_benchmark_list",
+    ),
+    path("compare_params/", views.compare_params_view, name="compare_params"),
 ]

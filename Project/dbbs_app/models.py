@@ -105,3 +105,19 @@ class BenchmarkItem(models.Model):
 
     def __str__(self):
         return str(self.pk)
+
+
+class CompareBenchmarkItem(models.Model):
+    query_code_1 = models.CharField(max_length=20)
+    benchmark_name_1 = models.CharField(max_length=200)
+    result_1 = models.FloatField()
+    benchmark_name_2 = models.CharField(max_length=200)
+    result_2 = models.FloatField()
+    diff = models.CharField(max_length=20)
+
+    class Meta:
+        db_table = "compare_benchmarks_v"
+        ordering = ["query_code_1"]
+
+    def __str__(self):
+        return self.query_code_1

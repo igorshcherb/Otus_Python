@@ -67,3 +67,8 @@ class QueryInGroupModelForm(forms.ModelForm):
                 attrs={"class": "form-control", "placeholder": "Введите запрос"}
             ),
         }
+
+
+class CompareParamsForm(forms.Form):
+    benchmark_name_1 = forms.CharField(max_length=200, label="Имя теста 1")
+    benchmark_name_2 = forms.CharField(max_length=200, label="Имя теста 2")

@@ -14,7 +14,8 @@ select bi.benchmark_id, b.name benchmark_name, q.code query_code, bi.start_datet
 ------------------------------------------------------------------------------------------
 -- drop view compare_benchmarks_v
 create view compare_benchmarks_v as
-select (select name from benchmarks b1 where b1.id = bi1.benchmark_id) benchmark_name_1, 
+select bi1.id, 
+       (select name from benchmarks b1 where b1.id = bi1.benchmark_id) benchmark_name_1, 
        (select q.code from queries q where q.id = bi1.query_id) query_code_1, bi1.result result_1,
        (select name from benchmarks b2 where b2.id = bi2.benchmark_id) benchmark_name_2, 
        (select q.code from queries q where q.id = bi2.query_id) query_code_2, bi2.result result_2,
