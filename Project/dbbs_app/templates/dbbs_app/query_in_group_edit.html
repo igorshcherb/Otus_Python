@@ -1,0 +1,16 @@
+{% extends "dbbs_app/base.html" %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %}
+<h1>{{ title }}</h1>
+
+<form method="post" class="mt-4">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Сохранить запрос в группе</button>
+</form>
+
+<a href="{% url 'query_in_group_list' %}" class="btn btn-secondary mt-3">Назад к списку</a>
+
+{% endblock %}

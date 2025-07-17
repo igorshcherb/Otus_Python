@@ -1,7 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
-from .models import Query, QueryGroup
+from .models import Query, QueryGroup, QueryInGroup
 
 
 class QueryModelForm(forms.ModelForm):
@@ -44,5 +44,26 @@ class QueryGroupModelForm(forms.ModelForm):
             ),
             "description": forms.TextInput(
                 attrs={"class": "form-control", "placeholder": "Введите описание"}
+            ),
+        }
+
+
+class QueryInGroupModelForm(forms.ModelForm):
+    class Meta:
+        model = QueryInGroup
+        fields = ["query_group", "query"]
+        labels = {
+            "query_group": "Группа запросов",
+            "query": "Запрос",
+        }
+        widgets = {
+            "query_group": forms.Select(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "Введите группу запросов",
+                }
+            ),
+            "query": forms.Select(
+                attrs={"class": "form-control", "placeholder": "Введите запрос"}
             ),
         }

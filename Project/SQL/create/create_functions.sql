@@ -15,13 +15,14 @@ end;
 $$;
 ------------------------------------------------------------------------------------------------------------------
 -- drop procedure insert_benchmark_item
-create or replace procedure insert_benchmark_item(p_benchmark_id integer, p_query_id varchar, 
+create or replace procedure insert_benchmark_item(p_benchmark_id integer, p_query_code varchar, 
   p_start_datetime timestamp, p_result float)
 language plpgsql  
 as $$
 begin
   insert into benchmark_items(benchmark_id, query_id, start_datetime, result) 
-    values(p_benchmark_id, p_query_id, p_start_datetime, p_result);
+    values(p_benchmark_id, 
+      (select id from queries where code = p_query_code), p_start_datetime, p_result);
 end;
 $$;
 

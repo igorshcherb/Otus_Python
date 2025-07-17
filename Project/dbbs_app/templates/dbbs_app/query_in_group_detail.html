@@ -1,0 +1,16 @@
+{% extends 'dbbs_app/base.html' %}
+
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %}
+<h1>Запрос в группе"{{ query_in_group.id }}"</h1>
+
+<p class="card-text"><b>Группа запросов:</b> {{ query_in_group.query_group }}</p>
+<p class="card-text"><b>Запрос:</b> {{ query_in_group.query }}</p>
+
+<div style="margin-bottom: 20px; text-align: right;">
+    <a class="btn btn-light" href="{% url 'query_in_group_list' %}">К списку запросов в группах</a>
+    <a href="{% url 'query_in_group_edit' query_in_group.id %}" class="btn btn-primary" role="button">Редактировать</a>
+    <a href="{% url 'query_in_group_delete' query_in_group.id %}" class="btn btn-danger" role="button">Удалить</a>
+</div>
+{% endblock %}

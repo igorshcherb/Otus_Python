@@ -37,4 +37,30 @@ urlpatterns = [
         views.QueryGroupCreateView.as_view(),
         name="query_group_create",
     ),
+    # queries_in_groups
+    path(
+        "queries_in_groups/",
+        views.QueryInGroupListView.as_view(),
+        name="query_in_group_list",
+    ),
+    path(
+        "query_in_group_detail/<int:pk>/",
+        views.QueryInGroupDetailView.as_view(),
+        name="query_in_group_detail",
+    ),
+    path(
+        "query_in_group_edit/<int:pk>/",
+        views.QueryInGroupUpdateView.as_view(),
+        name="query_in_group_edit",
+    ),
+    path(
+        "query_in_group_delete/<int:pk>/",
+        views.QueryInGroupDeleteView.as_view(),
+        name="query_in_group_delete",
+    ),
+    path(
+        "query_in_group_create/",
+        views.QueryInGroupCreateView.as_view(),
+        name="query_in_group_create",
+    ),
 ]

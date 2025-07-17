@@ -13,9 +13,9 @@ from django.views.generic import (
 from django.views.generic.base import TemplateView
 from django.urls import reverse_lazy
 from django.contrib import messages
-from .models import QueryGroup, Query
+from .models import Query, QueryGroup, QueryInGroup
 
-from .forms import QueryModelForm, QueryGroupModelForm
+from .forms import QueryModelForm, QueryGroupModelForm, QueryInGroupModelForm
 
 
 class HomeTemplateView(TemplateView):
@@ -89,7 +89,7 @@ class QueryDeleteView(QueryView, DeleteView):
 
 
 class QueryCreateView(QueryView, CreateView):
-    """Представление для отображения страницы создания запроса"""
+    """Представление для создания запроса"""
 
     template_name = "dbbs_app/query_create.html"
     form_class = QueryModelForm
@@ -145,7 +145,7 @@ class QueryGroupDeleteView(QueryGroupView, DeleteView):
 
 
 class QueryGroupCreateView(QueryGroupView, CreateView):
-    """Представление для отображения страницы создания группы запроса"""
+    """Представление для создания группы запроса"""
 
     template_name = "dbbs_app/query_group_create.html"
     form_class = QueryGroupModelForm
@@ -153,4 +153,60 @@ class QueryGroupCreateView(QueryGroupView, CreateView):
 
     def form_valid(self, form):
         messages.success(self.request, "Группа запросов успешно создана")
+        return super().form_valid(form)
+
+
+class QueryInGroupView:
+    """Базовый класс для модели QueryInGroup"""
+
+    model = QueryInGroup
+
+
+class QueryInGroupListView(QueryInGroupView, ListView):
+    """Представление для списка запросов в группах"""
+
+    template_name = "dbbs_app/query_in_group_list.html"
+    context_object_name = "queries_in_groups"
+    paginate_by = 5
+
+
+class QueryInGroupDetailView(QueryInGroupView, DetailView):
+    """Представление для деталей запроса в группе"""
+
+    template_name = "dbbs_app/query_in_group_detail.html"
+    context_object_name = "query_in_group"
+
+
+class QueryInGroupUpdateView(QueryInGroupView, UpdateView):
+    """Представление для редактирования запроса в группе"""
+
+    template_name = "dbbs_app/query_in_group_edit.html"
+    form_class = QueryInGroupModelForm
+    success_url = reverse_lazy("query_in_group_list")
+
+    def form_valid(self, form):
+        messages.success(self.request, "Запрос в группе успешно обновлен")
+        return super().form_valid(form)
+
+
+class QueryInGroupDeleteView(QueryInGroupView, DeleteView):
+    """Представление для удаления запроса из группы"""
+
+    template_name = "dbbs_app/query_in_group_delete.html"
+    success_url = reverse_lazy("query_in_group_list")
+
+    def form_valid(self, form):
+        messages.success(self.request, "Запрос успешно удален из группы")
+        return super().form_valid(form)
+
+
+class QueryInGroupCreateView(QueryInGroupView, CreateView):
+    """Представление для создания запроса в группе"""
+
+    template_name = "dbbs_app/query_in_group_create.html"
+    form_class = QueryInGroupModelForm
+    success_url = reverse_lazy("query_in_group_list")
+
+    def form_valid(self, form):
+        messages.success(self.request, "Запрос успешно добавлен в группу")
         return super().form_valid(form)

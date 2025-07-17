@@ -16,5 +16,7 @@ delete from queries;
 --
 select * from compare_benchmarks_v where benchmark_name_1 = 'benchmark01' and benchmark_name_2 = 'benchmark12'
 
+select host, port, database, username, password from connections where code = 'pg1'
+
 
 
