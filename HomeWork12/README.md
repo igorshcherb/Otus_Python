@@ -1,36 +1,40 @@
 ### Курс "Python Developer. Basic" ###
 
-### Домашнее задание № 11 ###
+### Домашнее задание № 12 ###
 
-## Задачи с Celery и Redis ##
+## GitHub Actions ##
 
-## Выполнено ## 
+## Выполнил ## 
 
-Установлен celery[redis].
-В докере запущен Redis (порт по умолчанию 6379).   
-Выполнена проверка работоспособности:
-   ```
-   redis-cli ping
-   ```
-   Ответ: PONG.   
-Redis подключен как брокер задач.   
-Создана задача для логирования информации о добавлении нового товара
+1. В директорию HomeWork12 скопировал файлы из директории HomeWork11 (вместе с тестами)
+2. В github по шаблону "Python application" создал action:
 
-### [tasks.py](store_app/tasks.py) ###
+### [test.yml](../.github/workflows/test.yml) ###
 
-## Команды в терминале ## 
+3. Выполнил тест локально в терминале:
+
 ```
-pip install gevent
-python manage.py migrate   
-docker run -d --name redis -p 6379:6379 redis
-celery -A config worker -l info -P gevent
-python manage.py runserver
+cd HomeWork12
+pytest
 ```
-## Лог в терминале ## 
+
 ```
-[2025-07-12 12:17:54,556: INFO/MainProcess] Task store_app.tasks.add_product_logging[b9a82732-398e-4338-9ac2-ae29e57a6813] received
-[2025-07-12 12:17:54,557: WARNING/MainProcess] Товар prod112233 успешно добавлен.
-[2025-07-12 12:17:54,584: INFO/MainProcess] Task store_app.tasks.add_product_logging[b9a82732-398e-4338-9ac2-ae29e57a6813] succeeded in 0.026612999999997555s: None
+====================== test session starts =====================
+platform win32 -- Python 3.13.0, pytest-8.3.5, pluggy-1.5.0
+django: version: 5.2.4, settings: config.settings (from ini)
+rootdir: C:\Work\PycharmProjects\HomeWork12
+configfile: pytest.ini
+plugins: anyio-4.9.0, Faker-37.4.0, django-4.11.1, mock-3.14.1
+collected 4 items                                                                                                                                                                                                
+
+store_app\tests\test_models.py ....                                                                                                                                                                        [100%]
+
+======================= 4 passed in 0.46s ======================
 ```
+
+4. Выполнил push в github и убедился, что тесты выполнились без ошибок:
+
+![Actions](./results/Actions.jpg "Actions")
+
 
 
