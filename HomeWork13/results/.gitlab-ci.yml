@@ -1,0 +1,19 @@
+image: python:3.12
+
+stages:
+  - build
+
+build:
+  stage: build
+  before_script:
+    - python3 --version
+    - export PATH="$HOME/.local/bin:$PATH"
+    - pip install virtualenv --break-system-packages
+    - virtualenv venv
+    - source venv/bin/activate
+    - sudo pip install -r requirements.txt --break-system-packages
+    - cd HomeWork13
+    - export DJANGO_SETTINGS_MODULE=config.settings
+    - sudo python3 manage.py migrate
+  script:
+    - pytest

@@ -1,0 +1,83 @@
+Running with gitlab-runner 18.2.0 (c24769e8)
+  on gitlabrunner yoh_ycxT0, system ID: s_1cb85f29bb59
+Preparing the "shell" executor
+00:00
+Using Shell (bash) executor...
+Preparing environment
+00:01
+Running on gitlabrunner...
+Getting source from Git repository
+00:00
+Gitaly correlation ID: 01K0VTTFYB5MBWV5PSCRQCGGTN
+Fetching changes with git depth set to 20...
+Reinitialized existing Git repository in /home/gitlab-runner/builds/yoh_ycxT0/0/root/otus_python_2/.git/
+Checking out 6e40fa7f as detached HEAD (ref is main)...
+Removing venv/
+Skipping Git submodules setup
+Executing "step_script" stage of the job script
+00:03
+$ python3 --version
+Python 3.12.3
+$ export PATH="$HOME/.local/bin:$PATH"
+$ pip install virtualenv --break-system-packages
+Defaulting to user installation because normal site-packages is not writeable
+Requirement already satisfied: virtualenv in /home/gitlab-runner/.local/lib/python3.12/site-packages (20.32.0)
+Requirement already satisfied: distlib<1,>=0.3.7 in /home/gitlab-runner/.local/lib/python3.12/site-packages (from virtualenv) (0.4.0)
+Requirement already satisfied: filelock<4,>=3.12.2 in /home/gitlab-runner/.local/lib/python3.12/site-packages (from virtualenv) (3.18.0)
+Requirement already satisfied: platformdirs<5,>=3.9.1 in /home/gitlab-runner/.local/lib/python3.12/site-packages (from virtualenv) (4.3.8)
+$ virtualenv venv
+created virtual environment CPython3.12.3.final.0-64 in 60ms
+  creator CPython3Posix(dest=/home/gitlab-runner/builds/yoh_ycxT0/0/root/otus_python_2/venv, clear=False, no_vcs_ignore=False, global=False)
+  seeder FromAppData(download=False, pip=bundle, via=copy, app_data_dir=/home/gitlab-runner/.local/share/virtualenv)
+    added seed packages: pip==25.1.1
+  activators BashActivator,CShellActivator,FishActivator,NushellActivator,PowerShellActivator,PythonActivator
+$ source venv/bin/activate
+$ sudo pip install -r requirements.txt --break-system-packages
+Requirement already satisfied: Django==5.2.4 in /usr/local/lib/python3.12/dist-packages (from -r requirements.txt (line 20)) (5.2.4)
+Requirement already satisfied: django-timezone-field==7.1 in /usr/local/lib/python3.12/dist-packages (from -r requirements.txt (line 22)) (7.1)
+Requirement already satisfied: pytest==8.3.5 in /usr/local/lib/python3.12/dist-packages (from -r requirements.txt (line 50)) (8.3.5)
+Requirement already satisfied: pytest-django==4.11.1 in /usr/local/lib/python3.12/dist-packages (from -r requirements.txt (line 51)) (4.11.1)
+Requirement already satisfied: pytest-mock==3.14.1 in /usr/local/lib/python3.12/dist-packages (from -r requirements.txt (line 52)) (3.14.1)
+Requirement already satisfied: asgiref>=3.8.1 in /usr/local/lib/python3.12/dist-packages (from Django==5.2.4->-r requirements.txt (line 20)) (3.9.1)
+Requirement already satisfied: sqlparse>=0.3.1 in /usr/local/lib/python3.12/dist-packages (from Django==5.2.4->-r requirements.txt (line 20)) (0.5.3)
+Requirement already satisfied: iniconfig in /usr/local/lib/python3.12/dist-packages (from pytest==8.3.5->-r requirements.txt (line 50)) (2.1.0)
+Requirement already satisfied: packaging in /usr/local/lib/python3.12/dist-packages (from pytest==8.3.5->-r requirements.txt (line 50)) (25.0)
+Requirement already satisfied: pluggy<2,>=1.5 in /usr/local/lib/python3.12/dist-packages (from pytest==8.3.5->-r requirements.txt (line 50)) (1.6.0)
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv
+$ cd HomeWork13
+$ export DJANGO_SETTINGS_MODULE=config.settings
+$ sudo python3 manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, sessions
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying auth.0012_alter_user_first_name_max_length... OK
+  Applying sessions.0001_initial... OK
+$ pytest
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.3.5, pluggy-1.6.0
+django: version: 5.2.4, settings: config.settings (from env)
+rootdir: /home/gitlab-runner/builds/yoh_ycxT0/0/root/otus_python_2/HomeWork13
+configfile: pytest.ini
+plugins: mock-3.14.1, django-4.11.1
+collected 4 items
+store_app/tests/test_models.py ....                                      [100%]
+============================== 4 passed in 0.13s ===============================
+Cleaning up project directory and file based variables
+00:00
+Job succeeded
