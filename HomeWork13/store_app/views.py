@@ -5,7 +5,6 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from .models import Product
 from .forms import ProductModelForm
-from .tasks import add_product_logging
 
 
 class HomeTemplateView(TemplateView):
