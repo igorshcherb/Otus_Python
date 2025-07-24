@@ -1,0 +1,33 @@
+|id |benchmark_name_1|query_code_1|result_1  |benchmark_name_2|query_code_2|result_2  |diff    |
+|---|----------------|------------|----------|----------------|------------|----------|--------|
+|7  |benchmark_pg_01 |q01         |57,12     |benchmark_pg_02 |q01         |12,932    |  -77.36|
+|8  |benchmark_pg_01 |q02         |0,77      |benchmark_pg_02 |q02         |0,059     |  -92.34|
+|9  |benchmark_pg_01 |q03         |0,167     |benchmark_pg_02 |q03         |0,014     |  -91.62|
+|10 |benchmark_pg_01 |q04         |0,026     |benchmark_pg_02 |q04         |0,021     |  -19.23|
+|11 |benchmark_pg_01 |q05         |184,718   |benchmark_pg_02 |q05         |5,936     |  -96.79|
+|12 |benchmark_pg_01 |q06         |653,276   |benchmark_pg_02 |q06         |24,026    |  -96.32|
+|13 |benchmark_pg_01 |q07         |2,708     |benchmark_pg_02 |q07         |0,884     |  -67.36|
+|14 |benchmark_pg_01 |q08         |0,028     |benchmark_pg_02 |q08         |0,015     |  -46.43|
+|15 |benchmark_pg_01 |q09         |27,131    |benchmark_pg_02 |q09         |12,503    |  -53.92|
+|16 |benchmark_pg_01 |q10         |0,815     |benchmark_pg_02 |q10         |0,025     |  -96.93|
+|17 |benchmark_pg_01 |q11         |264,585   |benchmark_pg_02 |q11         |88,731    |  -66.46|
+|18 |benchmark_pg_01 |q12         |83,662    |benchmark_pg_02 |q12         |66,349    |  -20.69|
+|19 |benchmark_pg_01 |q13         |27,899    |benchmark_pg_02 |q13         |34,522    |   23.74|
+|20 |benchmark_pg_01 |q14         |0,011     |benchmark_pg_02 |q14         |0,01      |   -9.09|
+|21 |benchmark_pg_01 |q15         |2 189,005 |benchmark_pg_02 |q15         |2 111,416 |   -3.54|
+|22 |benchmark_pg_01 |q16         |2 871,329 |benchmark_pg_02 |q16         |2 902,767 |    1.09|
+|23 |benchmark_pg_01 |q17         |0,66      |benchmark_pg_02 |q17         |0,204     |  -69.09|
+|24 |benchmark_pg_01 |q18         |2 558,942 |benchmark_pg_02 |q18         |2 183,507 |  -14.67|
+|25 |benchmark_pg_01 |q19         |47 818,243|benchmark_pg_02 |q19         |47 203,905|   -1.28|
+|26 |benchmark_pg_01 |q20         |1 427,958 |benchmark_pg_02 |q20         |1 455,418 |    1.92|
+|27 |benchmark_pg_01 |q21         |0,646     |benchmark_pg_02 |q21         |0,069     |  -89.32|
+|28 |benchmark_pg_01 |q22         |0,013     |benchmark_pg_02 |q22         |0,012     |   -7.69|
+|29 |benchmark_pg_01 |q23         |0,009     |benchmark_pg_02 |q23         |0,016     |   77.78|
+|30 |benchmark_pg_01 |q24         |0,013     |benchmark_pg_02 |q24         |0,011     |  -15.38|
+|31 |benchmark_pg_01 |q25         |238,145   |benchmark_pg_02 |q25         |249,848   |    4.91|
+|32 |benchmark_pg_01 |q26         |1,165     |benchmark_pg_02 |q26         |0,117     |  -89.96|
+|33 |benchmark_pg_01 |q27         |32,073    |benchmark_pg_02 |q27         |33,169    |    3.42|
+|34 |benchmark_pg_01 |q28         |49,159    |benchmark_pg_02 |q28         |29,632    |  -39.72|
+|35 |benchmark_pg_01 |q29         |45,933    |benchmark_pg_02 |q29         |28,558    |  -37.83|
+|36 |benchmark_pg_01 |q30         |142,322   |benchmark_pg_02 |q30         |81,923    |  -42.44|
+|37 |benchmark_pg_01 |q31         |90,006    |benchmark_pg_02 |q31         |128,029   |   42.24|
