@@ -7,4 +7,4 @@ insert into connections(code, connection_type_id, description, host, port, datab
 insert into connections(code, connection_type_id, description, host, port, database, username, password) 
   values ('adb', 
           (SELECT ct.id FROM connection_types ct WHERE ct.code = 'postgresql'), 
-          'Arenadata DB', '192.168.2.151', '5432', 'adb', 'gpadmin', 'gpadmin');
+          'Arenadata DB', '192.168.2.151', '5432', 'adb', 'gpadmin', 'admin');
