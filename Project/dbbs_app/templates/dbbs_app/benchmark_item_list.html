@@ -3,14 +3,14 @@
 {% block title %} {{ title }} {% endblock %}
 
 {% block content %}
-<h1>Список элементов тестов производительности</h1>
+<h1>Список элементов замеров производительности</h1>
 <ul>
     {% for benchmark_item in benchmark_items %}
     <li style="margin-bottom: 20px;" class="list-group-item">
         <div class="card">
-            <h5 class="card-header">Элемент теста производительности #{{ benchmark_item.id }}</h5>
+            <h5 class="card-header">Элемент замера производительности #{{ benchmark_item.id }}</h5>
             <div class="card-body">
-                <p class="card-text"><b>Тест производительности:</b> {{ benchmark_item.benchmark }}</p>
+                <p class="card-text"><b>Замер производительности:</b> {{ benchmark_item.benchmark }}</p>
                 <p class="card-text"><b>Запрос:</b> {{ benchmark_item.query }}</p>
                 <p class="card-text"><b>Дата и время начала:</b> {{ benchmark_item.start_datetime }}</p>
                 <p class="card-text"><b>Результат, мс:</b> {{ benchmark_item.result }}</p>

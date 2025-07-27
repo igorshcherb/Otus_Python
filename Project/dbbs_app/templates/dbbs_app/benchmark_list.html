@@ -3,12 +3,12 @@
 {% block title %} {{ title }} {% endblock %}
 
 {% block content %}
-<h1>Список тестов производительности</h1>
+<h1>Список замеров производительности</h1>
 <ul>
     {% for benchmark in benchmarks %}
     <li style="margin-bottom: 20px;" class="list-group-item">
         <div class="card">
-            <h5 class="card-header">Тест производительности #{{ benchmark.id }}</h5>
+            <h5 class="card-header">Замер производительности #{{ benchmark.id }}</h5>
             <div class="card-body">
                 <p class="card-text"><b>Имя: </b><a href="{% url 'benchmark_item_list' benchmark.pk %}">
                     {{ benchmark.name }}</a></p>

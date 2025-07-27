@@ -1,3 +1,5 @@
+set schema 'bookings';
+
 analyze aircrafts;
 analyze airports;
 analyze boarding_passes;
