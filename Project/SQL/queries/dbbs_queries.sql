@@ -18,5 +18,9 @@ select * from compare_benchmarks_v where benchmark_name_1 = 'benchmark01' and be
 
 select host, port, database, username, password from connections where code = 'pg1'
 
-
+--
+select * from benchmarks;
+select * from benchmark_items where benchmark_id = 6 order by query_id;
+select * from benchmark_items where benchmark_id = 7 order by query_id;
+select * from compare_benchmarks_v where benchmark_name_1 = 'benchmark_pg_01' and benchmark_name_2 = 'benchmark_pg_02'
 
